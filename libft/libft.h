@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:38:19 by authomas          #+#    #+#             */
-/*   Updated: 2025/02/19 21:35:09 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/03/13 18:00:27 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdarg.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 100
 # endif
 # if BUFFER_SIZE < 1
 #  undef BUFFER_SIZE

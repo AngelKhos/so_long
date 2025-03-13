@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:20:13 by authomas          #+#    #+#             */
-/*   Updated: 2025/03/13 15:56:02 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/03/13 18:02:46 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,9 @@ int file_checking(char *file_name)
 
 	size = ft_strlen(file_name);
 	if (size <= 4)
-	{
-		ft_printf("pas bien >:(");
-		return (1)  ;
-	}
+		return (1);
 	if(ft_strncmp(&file_name[size - 4], ".ber", size) == 0)
-	{
-		ft_printf("happy :)");
 		return (0);
-	}
-	ft_printf("pas bien >:(");
 	return (1);
 }
 int check_lines(char *map_line, size_t len_line)
@@ -53,7 +46,7 @@ void get_map(int fd)
 	size_t len_line;
 	
 	map_line = get_next_line(fd);
-	len_line = ft_strlen(map_line); 
+	len_line = ft_strlen(map_line);
 	while (map_line)
 	{
 		if (check_lines(map_line, len_line))
@@ -62,6 +55,8 @@ void get_map(int fd)
 			free(map_line);
 		}
 		map_line = get_next_line(fd);
+		if (map_line[ft_strlen(map_line) - 1] != '\n')
+		map_line[ft_strlen(map_line)] = '\n';
 	}
 }
 
