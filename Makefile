@@ -15,8 +15,7 @@ DIR_DEPS=.deps
 SRCS=srcs/map_checking.c\
 	srcs/main.c\
 	srcs/parse_utils.c\
-	srcs/error.c\
-	srcs/player.c
+	srcs/error.c
 
 LIB= libft/libft.a
 MLX= minilibx/libmlx.a
@@ -41,12 +40,12 @@ libmlx:
 	$(MAKE) --silent -C ./minilibx 2> /dev/null
 
 $(NAME): $(OBJS) $(DEPS) $(INCS)
-	$(CC) $(CC_FLAGS) $(OBJS) $(LIB) $(MLX) -o $@
+	$(CC) $(CC_FLAGS) $(OBJS) -L minilibx -lmlx -framework OpenGL -framework AppKit $(LIB) $(MLX) -o $@
 	echo "$(BLUE) Your so_long is ready $(END)"
 
 
 $(DIR_OBJS)/%.o: srcs/%.c | $(DIR_OBJS) $(DIR_DEPS)
-	$(CC) $(CC_FLAGS) -MMD -MP -MF $(DIR_DEPS)/$*.d -c -o $@ $<
+	$(CC) $(CC_FLAGS) -Imlx -MMD -MP -MF $(DIR_DEPS)/$*.d -c -o $@ $<
 
 # /////////////////////////
 

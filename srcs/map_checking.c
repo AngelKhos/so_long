@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*   map_checking.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:20:13 by authomas          #+#    #+#             */
-/*   Updated: 2025/03/20 18:58:02 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/03/24 23:57:54 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char *get_map(int fd)
 			map = ft_join(map, new_line);
 		else
 		{
+			ft_printf("Error\nSo_long: the map is not ok");
 			free(map);
 			return (NULL);
 		}
@@ -70,7 +71,7 @@ int is_map_closed(char *map)
 
 	i = 0;
 	line_count = 0;
-	big_map = ft_split(ft_strdup(map), '\n');
+	big_map = ft_split(map, '\n');
 	while (big_map[line_count])
 		line_count++;
 	while (big_map[0][i])
@@ -90,7 +91,7 @@ int is_map_closed(char *map)
 	return (1);
 }
 
-char *map_checking(char *av)
+int map_checking(char *av, t_data *data)
 {
 	int fd;
 	char *map;
@@ -101,16 +102,18 @@ char *map_checking(char *av)
 	if (fd == -1)
 	{
 		perror("Error\nso_long");
-		return (NULL);
+		return (0);
 	}
 	map = get_map(fd);
 	if (!map)
-		return (NULL);
-	if (!check_map_elem(map))
-		return (free(map), NULL);
-	if (!is_map_closed(map))
-		return (free(map), NULL);
-	if (!valid_ff(map))
-		return (free(map), NULL);
-	return (map);
+		return (0);
+	data->map = ft_split(map, '\n');
+	if (!check_map_elem(map, data) || !is_map_closed(map) || !valid_ff(map, data))
+	{
+		ft_printf("Error\nSo_long: the map is not ok");
+		free(map);
+		return (0);
+	}
+	free(map);
+	return (1);
 }

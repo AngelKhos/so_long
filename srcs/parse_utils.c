@@ -6,21 +6,59 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 14:38:46 by authomas          #+#    #+#             */
-/*   Updated: 2025/03/20 18:52:33 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/03/24 23:38:24 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/so_long.h"
 
-int check_map_elem(char *map)
+int get_player_pos_x(char **map)
+{
+	int x;
+	int y;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while(map[y][x])
+		{
+			if (map[y][x] == 'P')
+				return (x);
+			x++;
+		}
+		y++;
+	}
+	return(0);
+}
+
+int get_player_pos_y(char **map)
+{
+	int x;
+	int y;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while(map[y][x])
+		{
+			if (map[y][x] == 'P')
+				return (y);
+			x++;
+		}
+		y++;
+	}
+	return(0);
+}
+
+int check_map_elem(char *map, t_data *data)
 {
 	int i;
 	int p;
-	int c;
 	int e;
 	
 	p = 0;
-	c = 0;
 	e = 0;
 	i = 0;
 	while (map[i])
@@ -30,49 +68,49 @@ int check_map_elem(char *map)
 		if (map[i] == 'E')
 			e++;
 		if (map[i] == 'C')
-			c++;
+			data->coin_count++;
 		i++;
 	}
-	if (p != 1 || c < 1 || e != 1 )
+	if (p != 1 || data->coin_count < 1 || e != 1 )
 		return (0);
 	return (1);
 }
+
 void flood_fill(char **map, int x, int y)
 {
-	map[x][y] = 'V';
+	map[y][x] = 'V';
 	
-	if (map[x][y + 1] != 'V' && map[x][y + 1] != '1')
-		flood_fill(map, x, y + 1);
-	if (map[x][y - 1] != 'V' && map[x][y - 1] != '1')
-		flood_fill(map, x, y - 1);
-	if (map[x + 1][y] != 'V' && map[x + 1][y] != '1')
+	if (map[y][x + 1] != 'V' && map[y][x + 1] != '1')
 		flood_fill(map, x + 1, y);
-	if (map[x - 1][y] != 'V' && map[x - 1][y] != '1')
+	if (map[y][x - 1] != 'V' && map[y][x - 1] != '1')
 		flood_fill(map, x - 1, y);
+	if (map[y + 1][x] != 'V' && map[y + 1][x] != '1')
+		flood_fill(map, x, y + 1);
+	if (map[y - 1][x] != 'V' && map[y - 1][x] != '1')
+		flood_fill(map, x, y - 1);
 }
 
-int valid_ff(char *map)
+int valid_ff(char *map, t_data *data)
 {
 	char **map_check;
 	int x;
 	int y;
-
+	
 	map_check = ft_split(ft_strdup(map), '\n');
-	x = get_player_pos_x(map_check);
-	y = get_player_pos_y(map_check);
-	flood_fill(map_check, x, y);
-	x = 0;
-	while (map_check[x])
+	data->ppos_x = get_player_pos_x(map_check);
+	data->ppos_y = get_player_pos_y(map_check);
+	flood_fill(map_check, data->ppos_x, data->ppos_y);
+	y = 0;
+	while (map_check[y])
 	{
-		y = 0;
-		while (map_check[x][y])
+		x = 0;
+		while (map_check[y][x])
 		{
-			if (map_check[x][y] == 'C' || map_check[x][y] == 'E')
+			if (map_check[y][x] == 'C' || map_check[y][x] == 'E')
 				return (0);
-			y++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 	return (1);
 }
-
