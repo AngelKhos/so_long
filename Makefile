@@ -15,7 +15,8 @@ DIR_DEPS=.deps
 SRCS=srcs/map_checking.c\
 	srcs/main.c\
 	srcs/parse_utils.c\
-	srcs/error.c
+	srcs/error.c\
+	srcs/img.c
 
 LIB= libft/libft.a
 MLX= minilibx/libmlx.a

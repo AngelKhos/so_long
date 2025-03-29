@@ -6,13 +6,13 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 14:38:46 by authomas          #+#    #+#             */
-/*   Updated: 2025/03/24 23:38:24 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/03/29 15:56:39 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/so_long.h"
 
-int get_player_pos_x(char **map)
+void get_teto_pos(char **map, t_data *data)
 {
 	int x;
 	int y;
@@ -24,32 +24,16 @@ int get_player_pos_x(char **map)
 		while(map[y][x])
 		{
 			if (map[y][x] == 'P')
-				return (x);
+			{
+				data->teto.pos_x = x;
+				data->teto.pos_y = y;
+				return ;
+			}
 			x++;
 		}
 		y++;
 	}
-	return(0);
-}
-
-int get_player_pos_y(char **map)
-{
-	int x;
-	int y;
-
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while(map[y][x])
-		{
-			if (map[y][x] == 'P')
-				return (y);
-			x++;
-		}
-		y++;
-	}
-	return(0);
+	return ;
 }
 
 int check_map_elem(char *map, t_data *data)
@@ -97,9 +81,8 @@ int valid_ff(char *map, t_data *data)
 	int y;
 	
 	map_check = ft_split(ft_strdup(map), '\n');
-	data->ppos_x = get_player_pos_x(map_check);
-	data->ppos_y = get_player_pos_y(map_check);
-	flood_fill(map_check, data->ppos_x, data->ppos_y);
+	get_teto_pos(map_check, data);
+	flood_fill(map_check, data->teto.pos_x, data->teto.pos_y);
 	y = 0;
 	while (map_check[y])
 	{

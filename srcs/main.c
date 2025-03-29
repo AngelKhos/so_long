@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:59:16 by authomas          #+#    #+#             */
-/*   Updated: 2025/03/26 20:56:16 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/03/29 16:56:18 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,11 @@ void data_init(t_data *data)
 }
 
 void game(t_data *data)
-{
-	void *img;
-	int img_width;
-	int img_height;
-	
+{	
 	data->mlx = mlx_init();
-	data->mlx_win = mlx_new_window(data->mlx, 32, 32, "UwU");
+	data->mlx_win = mlx_new_window(data->mlx, 800, 600, "UwU");
 	get_img(data);
-	img = mlx_xpm_file_to_image(data->mlx, "assets/floor.xpm",&img_width, &img_height);
-	mlx_put_image_to_window(data->mlx, data->mlx_win, img, 0, 0);
+	print_map(data);
 	mlx_loop(data->mlx);
 }
 
