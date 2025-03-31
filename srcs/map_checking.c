@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:20:13 by authomas          #+#    #+#             */
-/*   Updated: 2025/03/24 23:57:54 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/03/30 17:54:40 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int map_checking(char *av, t_data *data)
 	map = get_map(fd);
 	if (!map)
 		return (0);
-	data->map = ft_split(map, '\n');
+	data->map.map = ft_split(map, '\n');
 	if (!check_map_elem(map, data) || !is_map_closed(map) || !valid_ff(map, data))
 	{
 		ft_printf("Error\nSo_long: the map is not ok");

@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 14:38:46 by authomas          #+#    #+#             */
-/*   Updated: 2025/03/29 15:56:39 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/03/30 17:56:34 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,7 @@ int valid_ff(char *map, t_data *data)
 		}
 		y++;
 	}
+	data->map.x_max = x;
+	data->map.y_max = y;
 	return (1);
 }

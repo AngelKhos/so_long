@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:21:16 by authomas          #+#    #+#             */
-/*   Updated: 2025/03/29 17:06:10 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/03/30 17:53:30 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,18 @@ typedef struct s_player
     int pos_y;
 } t_player;
 
+typedef struct s_map
+{
+    char **map;
+    int x_max;
+    int y_max;
+} t_map;
+
 typedef struct s_data
 {
     t_player teto;
     int coin_count;
-    char **map;
+    t_map map;
     void *mlx;
     void *mlx_win;
     t_img img;
