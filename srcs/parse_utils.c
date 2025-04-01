@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 14:38:46 by authomas          #+#    #+#             */
-/*   Updated: 2025/03/30 17:56:34 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/01 22:22:06 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,30 @@ void get_teto_pos(char **map, t_data *data)
 			{
 				data->teto.pos_x = x;
 				data->teto.pos_y = y;
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+	return ;
+}
+
+void get_exit_pos(char **map, t_data *data)
+{
+	int x;
+	int y;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while(map[y][x])
+		{
+			if (map[y][x] == 'E')
+			{
+				data->map.exit_pos_x = x;
+				data->map.exit_pos_y = y;
 				return ;
 			}
 			x++;
@@ -82,6 +106,7 @@ int valid_ff(char *map, t_data *data)
 	
 	map_check = ft_split(ft_strdup(map), '\n');
 	get_teto_pos(map_check, data);
+	get_exit_pos(map_check, data);
 	flood_fill(map_check, data->teto.pos_x, data->teto.pos_y);
 	y = 0;
 	while (map_check[y])
