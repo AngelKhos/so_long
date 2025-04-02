@@ -6,22 +6,22 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 14:38:46 by authomas          #+#    #+#             */
-/*   Updated: 2025/04/01 22:22:06 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/02 17:13:55 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/so_long.h"
 
-void get_teto_pos(char **map, t_data *data)
+void	get_teto_pos(char **map, t_data *data)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (map[y])
 	{
 		x = 0;
-		while(map[y][x])
+		while (map[y][x])
 		{
 			if (map[y][x] == 'P')
 			{
@@ -36,16 +36,16 @@ void get_teto_pos(char **map, t_data *data)
 	return ;
 }
 
-void get_exit_pos(char **map, t_data *data)
+void	get_exit_pos(char **map, t_data *data)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (map[y])
 	{
 		x = 0;
-		while(map[y][x])
+		while (map[y][x])
 		{
 			if (map[y][x] == 'E')
 			{
@@ -60,12 +60,12 @@ void get_exit_pos(char **map, t_data *data)
 	return ;
 }
 
-int check_map_elem(char *map, t_data *data)
+int	check_map_elem(char *map, t_data *data)
 {
-	int i;
-	int p;
-	int e;
-	
+	int	i;
+	int	p;
+	int	e;
+
 	p = 0;
 	e = 0;
 	i = 0;
@@ -79,15 +79,14 @@ int check_map_elem(char *map, t_data *data)
 			data->coin_count++;
 		i++;
 	}
-	if (p != 1 || data->coin_count < 1 || e != 1 )
+	if (p != 1 || data->coin_count < 1 || e != 1)
 		return (0);
 	return (1);
 }
 
-void flood_fill(char **map, int x, int y)
+void	flood_fill(char **map, int x, int y)
 {
 	map[y][x] = 'V';
-	
 	if (map[y][x + 1] != 'V' && map[y][x + 1] != '1')
 		flood_fill(map, x + 1, y);
 	if (map[y][x - 1] != 'V' && map[y][x - 1] != '1')
@@ -98,13 +97,13 @@ void flood_fill(char **map, int x, int y)
 		flood_fill(map, x, y - 1);
 }
 
-int valid_ff(char *map, t_data *data)
+int	valid_ff(char *map, t_data *data)
 {
-	char **map_check;
-	int x;
-	int y;
-	
-	map_check = ft_split(ft_strdup(map), '\n');
+	char	**map_check;
+	int		x;
+	int		y;
+
+	map_check = ft_split(map, '\n');
 	get_teto_pos(map_check, data);
 	get_exit_pos(map_check, data);
 	flood_fill(map_check, data->teto.pos_x, data->teto.pos_y);
@@ -120,6 +119,7 @@ int valid_ff(char *map, t_data *data)
 		}
 		y++;
 	}
+	free_tab(map_check);
 	data->map.x_max = x;
 	data->map.y_max = y;
 	return (1);
