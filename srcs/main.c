@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:59:16 by authomas          #+#    #+#             */
-/*   Updated: 2025/04/01 15:15:26 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/01 22:34:31 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void game(t_data *data)
 	get_img(data);
 	print_map(data);
 	mlx_key_hook(data->mlx_win, key_pressed, data);
+	if(data->coins == data->coin_count && data->map.map[data->teto.pos_y][data->teto.pos_x] == data->map.map[data->map.exit_pos_y][data->map.exit_pos_x])
+		end_the_game(); //todo
 	mlx_loop(data->mlx);
 }
 
