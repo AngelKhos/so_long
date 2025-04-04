@@ -45,7 +45,7 @@ $(NAME): $(OBJS) $(DEPS) $(INCS)
 	echo "$(BLUE) Your so_long is ready $(END)"
 
 
-$(DIR_OBJS)/%.o: srcs/%.c | $(DIR_OBJS) $(DIR_DEPS)
+$(DIR_OBJS)/%.o: srcs/%.c Makefile | $(DIR_OBJS) $(DIR_DEPS) 
 	$(CC) $(CC_FLAGS) -I/usr/include -Imlx_linux -O3 -MMD -MP -MF $(DIR_DEPS)/$*.d -c -o $@ $<
 
 # /////////////////////////

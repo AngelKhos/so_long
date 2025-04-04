@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:20:13 by authomas          #+#    #+#             */
-/*   Updated: 2025/04/02 17:52:43 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/04 17:28:50 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,14 @@ char	*get_map(int fd)
 		{
 			ft_printf("Error\nSo_long: invalid map");
 			free(map);
+			close(fd);
+			free(new_line);
 			return (NULL);
 		}
 		free(new_line);
 		new_line = get_next_line(fd);
 	}
+	close(fd);
 	return (map);
 }
 

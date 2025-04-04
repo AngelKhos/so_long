@@ -62,9 +62,10 @@ DIR_DEPS=.deps
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	echo "$(GREEN) Compiling libft ... $(END)" 
 	$(AR) $(AR_ARG) $@ $(OBJS)
 	
-$(DIR_OBJS)/%.o: %.c | $(DIR_OBJS) $(DIR_DEPS)
+$(DIR_OBJS)/%.o: %.c Makefile | $(DIR_OBJS) $(DIR_DEPS)
 	$(CC) $(CC_FLAGS) -MMD -MP -MF $(DIR_DEPS)/$*.d -c -o $@ $<
 
 $(DIR_OBJS):
@@ -84,3 +85,9 @@ re: fclean all
 
 .PHONY: all clean fclean re
 .SILENT:
+
+
+GREEN=\033[0;32m
+RED=\033[0;31m
+BLUE=\033[0;34m
+END=\033[0m

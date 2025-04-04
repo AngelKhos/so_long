@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:17:07 by authomas          #+#    #+#             */
-/*   Updated: 2025/04/02 17:35:20 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/04 17:49:25 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,31 @@ void	end_the_game(t_data *data, int move)
 
 static void	img_destroy(t_data *data)
 {
-	mlx_destroy_image(data->mlx, data->img.exit);
-	mlx_destroy_image(data->mlx, data->img.teto_img);
-	mlx_destroy_image(data->mlx, data->img.wall);
-	mlx_destroy_image(data->mlx, data->img.floor);
-	mlx_destroy_image(data->mlx, data->img.item);
+	if (data->mlx)
+	{
+		if (data->img.exit)
+			mlx_destroy_image(data->mlx, data->img.exit);
+		if (data->img.teto_img)
+			mlx_destroy_image(data->mlx, data->img.teto_img);
+		if (data->img.wall)
+			mlx_destroy_image(data->mlx, data->img.wall);
+		if (data->img.floor)
+			mlx_destroy_image(data->mlx, data->img.floor);
+		if (data->img.item)
+			mlx_destroy_image(data->mlx, data->img.item);
+	}
 }
 
-int	ft_laundry(t_data *data)
+void	ft_laundry(t_data *data)
 {
 	free_tab(data->map.map);
 	img_destroy(data);
-	mlx_destroy_window(data->mlx, data->mlx_win);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
+	if (data->mlx)
+	{
+		if (data->mlx_win)
+			mlx_destroy_window(data->mlx, data->mlx_win);
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
 	exit(0);
-	return (0);
 }

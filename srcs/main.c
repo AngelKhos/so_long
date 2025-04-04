@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:59:16 by authomas          #+#    #+#             */
-/*   Updated: 2025/04/02 17:54:15 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/04 17:46:28 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,17 @@ void	game(t_data *data)
 	if (!(data->mlx))
 	{
 		printf("Error\nSo_long: mlx error");
+		ft_laundry(data);
 		return ;
 	}
 	data->mlx_win = mlx_new_window(data->mlx, data->map.x_max * 32,
 			data->map.y_max * 32, "so_long");
+	if (!data->mlx_win)
+	{
+		printf("Error\nSo_long: mlx error");
+		ft_laundry(data);
+		return ;
+	}
 	get_img(data);
 	print_map_loop(data);
 	mlx_key_hook(data->mlx_win, key_pressed, data);
