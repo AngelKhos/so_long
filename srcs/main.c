@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:59:16 by authomas          #+#    #+#             */
-/*   Updated: 2025/04/04 17:46:28 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/06 14:55:11 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	game(t_data *data)
 	data->mlx = mlx_init();
 	if (!(data->mlx))
 	{
-		printf("Error\nSo_long: mlx error");
+		printf("Error\nSo_long: mlx error\n");
 		ft_laundry(data);
 		return ;
 	}
@@ -66,7 +66,7 @@ void	game(t_data *data)
 			data->map.y_max * 32, "so_long");
 	if (!data->mlx_win)
 	{
-		printf("Error\nSo_long: mlx error");
+		printf("Error\nSo_long: mlx error\n");
 		ft_laundry(data);
 		return ;
 	}
@@ -83,7 +83,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		ft_printf("Error\nSo_long: wrong number of arguments");
+		ft_printf("Error\nSo_long: wrong number of arguments\n");
 		return (1);
 	}
 	data_init(&data);

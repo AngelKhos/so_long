@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 20:17:42 by authomas          #+#    #+#             */
-/*   Updated: 2025/04/04 17:50:50 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/06 14:54:46 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	get_img(t_data *data)
 	if (!data->img.exit || !data->img.floor || !data->img.wall
 		|| !data->img.item || !data->img.teto_img)
 	{
-		printf("Error\nSo_long: image error");
+		printf("Error\nSo_long: image error\n");
 		return (ft_laundry(data));
 	}
 }

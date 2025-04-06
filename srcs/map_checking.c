@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:20:13 by authomas          #+#    #+#             */
-/*   Updated: 2025/04/04 17:28:50 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/06 14:56:27 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*get_map(int fd)
 			map = ft_join(map, new_line);
 		else
 		{
-			ft_printf("Error\nSo_long: invalid map");
+			ft_printf("Error\nSo_long: invalid map\n");
 			free(map);
 			close(fd);
 			free(new_line);
@@ -107,7 +107,7 @@ int	map_checking(char *av, t_data *data)
 		fd = open(av, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf("Error\nSo_long: invalid fd or extension");
+		ft_printf("Error\nSo_long: invalid fd or extension\n");
 		return (0);
 	}
 	map = get_map(fd);
@@ -117,7 +117,7 @@ int	map_checking(char *av, t_data *data)
 	if (!check_map_elem(map, data) || !is_map_closed(map)
 		|| !valid_ff(map, data))
 	{
-		ft_printf("Error\nSo_long: invalid map");
+		ft_printf("Error\nSo_long: invalid map\n");
 		free_tab(data->map.map);
 		free(map);
 		return (0);
