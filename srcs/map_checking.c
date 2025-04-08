@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:20:13 by authomas          #+#    #+#             */
-/*   Updated: 2025/04/06 14:56:27 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/07 14:46:21 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,15 @@ char	*get_map(int fd)
 
 	new_line = get_next_line(fd);
 	map = NULL;
-	len_line = ft_strlen(new_line);
+	if (new_line)
+		len_line = ft_strlen(new_line);
 	while (new_line)
 	{
 		if (check_lines(new_line, len_line))
 			map = ft_join(map, new_line);
 		else
 		{
-			ft_printf("Error\nSo_long: invalid map\n");
+			ft_printf("Error: invalid map\n");
 			free(map);
 			close(fd);
 			free(new_line);
@@ -77,16 +78,16 @@ int	is_map_closed(char *map)
 	i = 0;
 	line_count = 0;
 	big_map = ft_split(map, '\n');
-	while (big_map[line_count])
+	while (big_map && big_map[line_count])
 		line_count++;
-	while (big_map[0][i])
+	while (big_map && big_map[0][i])
 	{
 		if (big_map[0][i] != '1' || big_map[line_count - 1][i] != '1')
 			return (free_tab(big_map), 0);
 		i++;
 	}
 	i = 0;
-	while (big_map[i])
+	while (big_map && big_map[i])
 	{
 		if (big_map[i][0] != '1'
 			|| big_map[i][ft_strlen(big_map[i]) - 1] != '1')
@@ -94,7 +95,7 @@ int	is_map_closed(char *map)
 		i++;
 	}
 	free_tab(big_map);
-	return (1);
+	return (!!big_map);
 }
 
 int	map_checking(char *av, t_data *data)
@@ -107,7 +108,7 @@ int	map_checking(char *av, t_data *data)
 		fd = open(av, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf("Error\nSo_long: invalid fd or extension\n");
+		ft_printf("Error: invalid fd or extension\n");
 		return (0);
 	}
 	map = get_map(fd);
@@ -117,7 +118,7 @@ int	map_checking(char *av, t_data *data)
 	if (!check_map_elem(map, data) || !is_map_closed(map)
 		|| !valid_ff(map, data))
 	{
-		ft_printf("Error\nSo_long: invalid map\n");
+		ft_printf("Error: invalid map\n");
 		free_tab(data->map.map);
 		free(map);
 		return (0);

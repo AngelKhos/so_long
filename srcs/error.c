@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:17:07 by authomas          #+#    #+#             */
-/*   Updated: 2025/04/04 17:49:25 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/07 14:10:53 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	img_destroy(t_data *data)
 	}
 }
 
-void	ft_laundry(t_data *data)
+int	ft_laundry(t_data *data)
 {
 	free_tab(data->map.map);
 	img_destroy(data);
@@ -64,4 +64,5 @@ void	ft_laundry(t_data *data)
 		free(data->mlx);
 	}
 	exit(0);
+	return (0);
 }

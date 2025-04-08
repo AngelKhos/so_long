@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:21:16 by authomas          #+#    #+#             */
-/*   Updated: 2025/04/04 17:49:18 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/07 14:10:21 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,6 @@ void	print_map(t_data *data, int x, int y);
 void	get_img(t_data *data);
 void	update_teto(t_data *data, int x, int y);
 void	end_the_game(t_data *data, int move);
-void		ft_laundry(t_data *data);
+int		ft_laundry(t_data *data);
 
 #endif

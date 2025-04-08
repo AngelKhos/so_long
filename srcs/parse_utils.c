@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 14:38:46 by authomas          #+#    #+#             */
-/*   Updated: 2025/04/02 17:13:55 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/07 14:25:55 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	valid_ff(char *map, t_data *data)
 		while (map_check[y][x])
 		{
 			if (map_check[y][x] == 'C' || map_check[y][x] == 'E')
-				return (0);
+				return (free_tab(map_check), 0);
 			x++;
 		}
 		y++;

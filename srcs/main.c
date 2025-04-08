@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:59:16 by authomas          #+#    #+#             */
-/*   Updated: 2025/04/06 14:55:11 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/04/07 14:44:32 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ int	main(int ac, char **av)
 	}
 	data_init(&data);
 	if (!map_checking(av[1], &data))
+	{
+		ft_printf("Error\nSo_long: parsing error\n");
 		return (1);
+	}
 	game(&data);
 	return (0);
 }
